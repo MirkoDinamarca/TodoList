@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Title from '../../Components/Title/Title'
-import List from '../../Components/List/List'
 import Button from '../../Components/Button/Button'
-// import { db } from '../../data/db'
+import List from '../../Components/List/List'
+import Title from '../../Components/Title/Title'
 
+// import { db } from '../../data/db'
 
 const Home = () => {
   // Lista de las tareas
@@ -11,69 +11,127 @@ const Home = () => {
     {
       id: 1,
       nombre: 'Juntarme con los chicos a codear',
-      descripcion: 'Hay que terminar la tarea',
       estado: false
     },
     {
       id: 2,
       nombre: 'Cocinar',
-      descripcion: 'Tengo q comer',
       estado: false
     },
     {
       id: 3,
       nombre: 'Hacer lo de análisis',
-      descripcion: 'Hacer lo de caso de usos',
       estado: false
     },
     {
       id: 4,
       nombre: 'Ir a inglés',
-      descripcion: '',
       estado: false
     },
   ]
   const [listTasks, setListTasks] = useState(tasks);
+  const [filterTasks, setFilterTasks] = useState(tasks);
+  const [valueInput1, setValueInput1] = useState('');
+  const [cantTasks, setCantTasks] = useState(checkStateCant);
 
-
-  // const guardarTarea = () => {
-  //   const newTask = {
-  //       nombre: ValueInput1,
-  //       descripcion: ValueInput2,
-  //       estado: false
-  //   };
-  //   setListTasks([...listTasks, newTask]);
-  // };
-
-  const [newTask, setNewTask] = useState({})
+  /**
+   * Cuenta el total de las tareas que vienen desde "BD" de aquellas que tengan el estado en false 
+   */
+  function checkStateCant() {
+    let aux = 0;
+    filterTasks.forEach(t => {
+      if (!t.estado) {
+        aux++
+      }
+    });
+    return aux;
+  }
 
   /**
    * Agrega una nueva tarea a lo que es la lista de tareas
    */
   const onClickHandlerAddTask = () => {
-    let tarea = {
-      id: 5,
-      nombre: 'Nueva tarea',
-      descripcion: 'Hay que terminar la tarea',
-      estado: false
+    if (valueInput1 != '') {
+      let tarea = {
+        id: filterTasks.length + 1,
+        nombre: valueInput1,
+        estado: false
+      }
+
+      /* CONSULTAR! Por qué al hacer esto funciona bien el asignar la tarea a la lista? */
+      setListTasks([...filterTasks, tarea])
+      setFilterTasks([...filterTasks, tarea])
+
+      /* Pero al hacerlo de esta manera no funciona (También el console.log me sigue figurando que tengo las mismas tareas) */
+      // setListTasks([...listTasks, tarea])
+      // setFilterTasks(listTasks)
     }
+
+    setValueInput1('')
   };
 
-   /**
-     * Elimina la tarea y filtra por todas las tareas que queda 
-     */
-   const onClickHandlerDelete = (tarea_id) => {
-    let tasksFilter = listTasks.filter(t => t.id !== tarea_id);
-    setListTasks(tasksFilter)
-};
+  /**
+    * Elimina la tarea y filtra por todas las tareas que queda 
+    */
+  const onClickHandlerDelete = (tarea_id) => {
+    let tasksFilter = filterTasks.filter(t => t.id !== tarea_id);
+    setFilterTasks(tasksFilter)
+    // setCantTasks(filterTasks.length - 1)
+  };
 
+  /**
+   * Funcion que cambia el estado de las tareas segun se tilda la checkbox
+   * findIndex()  busca el indice de la tarea
+   */
+  const onClickHandlerCheck = (tarea) => {
+    const taskExist = filterTasks.findIndex((task) => tarea.id == task.id);
+
+    if (taskExist >= 0) {
+      const updateTask = [...filterTasks]
+
+      if (updateTask[taskExist].estado) {
+        updateTask[taskExist].estado = false
+      } else {
+        updateTask[taskExist].estado = true
+      }
+      setFilterTasks(updateTask)
+    }
+
+    let aux = 0;
+    filterTasks.forEach(t => {
+      if (!t.estado) {
+        aux++
+      }
+    });
+    setCantTasks(aux);
+  }
+
+  /**
+   * Busca lo que el usuario tipee en la barra y filtra las tareas
+   */
+  const onChangeSearch = (param) => {
+    if (!param.target.value) {
+      setFilterTasks(listTasks)
+    } else {
+      let tasksFilter = listTasks.filter(t => (t.nombre).toLowerCase().includes((param.target.value).toLowerCase()));
+      setFilterTasks(tasksFilter)
+    }
+  };
 
   return (
     <div>
       <Title />
-      {/* <p>Hay {tasks} disponibles</p> */}
-      <Button text="Agregar tarea" onClick={onClickHandlerAddTask} />
-      <List listTasks={listTasks} onClickHandlerDelete={onClickHandlerDelete} />
+      {/* Formulario para agregar una tarea */}
+      <section>
+        <input type="text" value={valueInput1} placeholder='Ingrese el nombre' onChange={e => setValueInput1(e.target.value)} />
+        <Button text="Agregar tarea" onClick={onClickHandlerAddTask} />
+      </section>
+
+      {/* Input para buscar las tareas */}
+      <input type="text" placeholder='Buscar...' onChange={onChangeSearch} />
+
+      {/* Lista de tareas */}
+      <List filterTasks={filterTasks} cantTasks={cantTasks} onClickHandlerDelete={onClickHandlerDelete} onClickHandlerCheck={onClickHandlerCheck} />
     </div>
   )
 }

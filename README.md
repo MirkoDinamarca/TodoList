@@ -47,3 +47,15 @@ librerías o eliminar aquellas que no se utilicen. Además, nos permite ejecutar
    `npm start`
 
 Visita `http://localhost:3000` en tu navegador para ver la aplicación en funcionamiento.
+
+## Descripción de la app
+La aplicación nos enseña una lista de tareas completamente modificable para el suuario. Las tareas se pueden eliminar, marcar como completadas o desmarcarlas e incluso agregar nuevas tareas.
+La app incluye tambien un buscador dinamico que filtra las tareas en base a lo que el usuario escriba en este.
+
+
+
+
+
+
+
+

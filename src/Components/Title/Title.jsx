@@ -1,8 +1,9 @@
 import React from 'react'
+import style from './Title.module.css'
 
 const Title = () => {
   return (
-    <div>Todo List</div>
+    <div className={style.Title}>Todo List</div>
   )
 }
 

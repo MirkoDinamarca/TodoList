@@ -1,15 +1,13 @@
 import Task from '../Task/Task'
-import Input from '../Input/Input'
 
-const List = ({listTasks, onClickHandlerDelete}) => {
+const List = ({filterTasks, cantTasks, onClickHandlerDelete, onClickHandlerCheck}) => {
 
     return (
         <div>
-            {/* <Input value={search} onChangeHandler={onChangeHandler} /> */}
             <ul>
-                {listTasks.length > 0 ? <p>Tenes tareas {listTasks.length} tareas pendientes que resolver</p> : <p>No tenes tareas</p>}
-                {listTasks.map(t => {
-                    return <Task key={t.id} task={t} onClickHandlerDelete={onClickHandlerDelete} />
+                {filterTasks.length > 0 ? <p>Tenes en total {filterTasks.length} tareas | {cantTasks} pendientes que resolver</p> : <p>No tenes tareas</p>}
+                {filterTasks.map(t => {
+                    return <Task key={t.id} task={t} onClickHandlerDelete={onClickHandlerDelete} onClickHandlerCheck={onClickHandlerCheck} />
                 })}
             </ul>
         </div>
