@@ -3,4 +3,6 @@
     align-items: center;
     gap: 5px;
     list-style: none;
+    background-color: aliceblue;
+    border-radius: 10px;
 }
