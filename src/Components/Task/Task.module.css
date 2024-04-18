@@ -16,10 +16,19 @@
 .task:hover {
     background-color: rgb(233, 233, 233);
     color: black;
-  }
+}
 
 .task input[type="checkbox"]:checked {
-    background-color: rgb(99, 180, 99); /* Puedes elegir el color que desees */
+    background-color: rgb(99, 180, 99);
+    /* Puedes elegir el color que desees */
+}
+
+.task_checked {
+    background-color: rgb(209, 233, 209);
+    border: 1px solid rgb(161, 201, 161);
+}
+.task_checked:hover {
+    background-color: rgb(209, 233, 209);
 }
 
 .task p {
@@ -51,10 +60,11 @@
     border: 1px solid lightgray;
 }
 
-.custom_checkbox:hover input[type="checkbox"] ~ .checkmark {
+.custom_checkbox:hover input[type="checkbox"]~.checkmark {
     background-color: rgb(185, 183, 183);
 }
 
-.custom_checkbox input[type="checkbox"]:checked ~ .checkmark {
-    background-color: rgb(99, 180, 99); /* Puedes elegir el color que desees */
+.custom_checkbox input[type="checkbox"]:checked~.checkmark {
+    background-color: rgb(99, 180, 99);
+    /* Puedes elegir el color que desees */
 }

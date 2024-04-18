@@ -51,7 +51,7 @@ const Home = () => {
    * Agrega una nueva tarea a lo que es la lista de tareas
    */
   const onClickHandlerAddTask = () => {
-    if (valueInput1 != '') {
+    if (valueInput1 !== '') {
       let tarea = {
         id: Math.random().toString(5).substring(2),
         nombre: valueInput1,
@@ -84,7 +84,7 @@ const Home = () => {
    * findIndex()  busca el indice de la tarea
    */
   const onClickHandlerCheck = (tarea) => {
-    const taskExist = filterTasks.findIndex((task) => tarea.id == task.id);
+    const taskExist = filterTasks.findIndex((task) => tarea.id === task.id);
 
     if (taskExist >= 0) {
       const updateTask = [...filterTasks]
