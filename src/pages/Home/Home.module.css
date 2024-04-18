@@ -1,0 +1,15 @@
+.home {
+    background-color: white;
+    box-shadow: 0px 0px 11px 0px rgb(223, 223, 223);
+    border-radius: 10px;
+    color: rgb(65, 63, 63);
+}
+
+.inputStyle{
+    width: 300px;
+    height: 50px;
+    margin: 5px;
+    border: 1px solid lightgray;
+    padding: 5px;
+    border-radius: 5px;
+}

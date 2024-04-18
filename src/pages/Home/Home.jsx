@@ -2,29 +2,29 @@ import React, { useState } from 'react'
 import Button from '../../Components/Button/Button'
 import List from '../../Components/List/List'
 import Title from '../../Components/Title/Title'
-
+import style from './Home.module.css'
 // import { db } from '../../data/db'
 
 const Home = () => {
   // Lista de las tareas
   const tasks = [
     {
-      id: 1,
+      id: Math.random().toString(5).substring(2),
       nombre: 'Juntarme con los chicos a codear',
       estado: false
     },
     {
-      id: 2,
+      id: Math.random().toString(5).substring(2),
       nombre: 'Cocinar',
       estado: false
     },
     {
-      id: 3,
+      id: Math.random().toString(5).substring(2),
       nombre: 'Hacer lo de análisis',
       estado: false
     },
     {
-      id: 4,
+      id: Math.random().toString(5).substring(2),
       nombre: 'Ir a inglés',
       estado: false
     },
@@ -53,7 +53,7 @@ const Home = () => {
   const onClickHandlerAddTask = () => {
     if (valueInput1 != '') {
       let tarea = {
-        id: filterTasks.length + 1,
+        id: Math.random().toString(5).substring(2),
         nombre: valueInput1,
         estado: false
       }
@@ -119,16 +119,17 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className={style.home}>
       <Title />
       {/* Formulario para agregar una tarea */}
       <section>
-        <input type="text" value={valueInput1} placeholder='Ingrese el nombre' onChange={e => setValueInput1(e.target.value)} />
-        <Button text="Agregar tarea" onClick={onClickHandlerAddTask} />
+        <input className={style.inputStyle} type="text" value={valueInput1} placeholder='Ingrese el nombre' onChange={e => setValueInput1(e.target.value)} />
+        <br />
+        <Button text="Agregar tarea" onClick={onClickHandlerAddTask} classStyle={'btn_add_task'}/>
       </section>
 
       {/* Input para buscar las tareas */}
-      <input type="text" placeholder='Buscar...' onChange={onChangeSearch} />
+      <input className={style.inputStyle} type="text" placeholder='Buscar...' onChange={onChangeSearch} />
 
       {/* Lista de tareas */}
       <List filterTasks={filterTasks} cantTasks={cantTasks} onClickHandlerDelete={onClickHandlerDelete} onClickHandlerCheck={onClickHandlerCheck} />

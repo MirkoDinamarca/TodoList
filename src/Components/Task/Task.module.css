@@ -1,8 +1,60 @@
 .task {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     list-style: none;
-    background-color: aliceblue;
     border-radius: 10px;
+    background-color: rgb(250, 251, 252);
+    color: rgb(51, 47, 47);
+    margin-bottom: 10px;
+    border: 1px solid #f1f1f1;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.task:hover {
+    background-color: rgb(233, 233, 233);
+    color: black;
+  }
+
+.task input[type="checkbox"]:checked {
+    background-color: rgb(99, 180, 99); /* Puedes elegir el color que desees */
+}
+
+.task p {
+    font-size: 15px;
+}
+
+.checked_div {
+    display: flex;
+    align-items: center;
+}
+
+.custom_checkbox {
+    display: flex;
+}
+
+.custom_checkbox input[type="checkbox"] {
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom_checkbox .checkmark {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.custom_checkbox:hover input[type="checkbox"] ~ .checkmark {
+    background-color: rgb(185, 183, 183);
+}
+
+.custom_checkbox input[type="checkbox"]:checked ~ .checkmark {
+    background-color: rgb(99, 180, 99); /* Puedes elegir el color que desees */
 }
