@@ -68,7 +68,7 @@ La app incluye tambien un buscador dinamico que filtra las tareas en base a lo q
 
 - Al agregar tarea, se modifica el "setListTask" y el "setFilterTask". En la misma función se utiliza el "setValueInput1" para devolver el input a un estado vacio. 
 
-- En la función "checkEstateCant", se modifica el setCantTask. 
+- En la función "checkEstateCant", se modifica el "setCantTask". 
 
 
 
