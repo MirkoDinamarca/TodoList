@@ -1,4 +1,4 @@
-# Todo-List
+# Todo-List - Grupo 7
 
 ## Integrantes del Equipo
 
@@ -49,8 +49,27 @@ librerías o eliminar aquellas que no se utilicen. Además, nos permite ejecutar
 Visita `http://localhost:3000` en tu navegador para ver la aplicación en funcionamiento.
 
 ## Descripción de la app
-La aplicación nos enseña una lista de tareas completamente modificable para el suuario. Las tareas se pueden eliminar, marcar como completadas o desmarcarlas e incluso agregar nuevas tareas.
+La aplicación nos enseña una lista de tareas completamente modificable para el usuario. Las tareas se pueden eliminar, marcar como completadas o desmarcarlas e incluso agregar nuevas tareas.
 La app incluye tambien un buscador dinamico que filtra las tareas en base a lo que el usuario escriba en este.
+
+## Preguntas
+
+1. componentes: 
+- Botones: Fue utilizado para agregar los botones de agregar y eliminar tarea. 
+
+- List: Renderiza una lista de tareas con un contador de la cantidad total de tareas y las pendientes.
+
+- Title: Renderiza titulo de la página.
+
+- Task: Renderiza la tarea junto con un checkbox que determina el estado de la misma y un botón para eliminarla.
+
+2. Utilizamos el hook useEstate en los siguientes elementos:
+- Al eliminar la tarea, utilizamos un "setFilterTask"
+
+- Al agregar tarea, se modifica el "setListTask" y el "setFilterTask". En la misma función se utiliza el "setValueInput1" para devolver el input a un estado vacio. 
+
+- En la función "checkEstateCant", se modifica el setCantTask. 
+
 
 
 
