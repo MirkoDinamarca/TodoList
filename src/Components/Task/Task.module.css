@@ -20,7 +20,6 @@
 
 .task input[type="checkbox"]:checked {
     background-color: rgb(99, 180, 99);
-    /* Puedes elegir el color que desees */
 }
 
 .task_checked {
@@ -66,5 +65,4 @@
 
 .custom_checkbox input[type="checkbox"]:checked~.checkmark {
     background-color: rgb(99, 180, 99);
-    /* Puedes elegir el color que desees */
 }

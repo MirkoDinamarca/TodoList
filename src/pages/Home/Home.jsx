@@ -5,30 +5,31 @@ import Title from '../../Components/Title/Title'
 import style from './Home.module.css'
 // import { db } from '../../data/db'
 
+// Lista de las tareas
+const tasks = [
+  {
+    id: Math.random().toString(5).substring(2),
+    nombre: 'Juntarme con los chicos a codear',
+    estado: false
+  },
+  {
+    id: Math.random().toString(5).substring(2),
+    nombre: 'Cocinar',
+    estado: false
+  },
+  {
+    id: Math.random().toString(5).substring(2),
+    nombre: 'Hacer lo de análisis',
+    estado: false
+  },
+  {
+    id: Math.random().toString(5).substring(2),
+    nombre: 'Ir a inglés',
+    estado: false
+  },
+]
+
 const Home = () => {
-  // Lista de las tareas
-  const tasks = [
-    {
-      id: Math.random().toString(5).substring(2),
-      nombre: 'Juntarme con los chicos a codear',
-      estado: false
-    },
-    {
-      id: Math.random().toString(5).substring(2),
-      nombre: 'Cocinar',
-      estado: false
-    },
-    {
-      id: Math.random().toString(5).substring(2),
-      nombre: 'Hacer lo de análisis',
-      estado: false
-    },
-    {
-      id: Math.random().toString(5).substring(2),
-      nombre: 'Ir a inglés',
-      estado: false
-    },
-  ]
   const [listTasks, setListTasks] = useState(tasks);
   const [filterTasks, setFilterTasks] = useState(tasks);
   const [valueInput1, setValueInput1] = useState('');
@@ -61,14 +62,8 @@ const Home = () => {
         nombre: valueInput1,
         estado: false
       }
-
-      /* CONSULTAR! Por qué al hacer esto funciona bien el asignar la tarea a la lista? */
       setListTasks([...filterTasks, tarea])
       setFilterTasks([...filterTasks, tarea])
-
-      /* Pero al hacerlo de esta manera no funciona (También el console.log me sigue figurando que tengo las mismas tareas) */
-      // setListTasks([...listTasks, tarea])
-      // setFilterTasks(listTasks)
     }
 
     setValueInput1('')
@@ -80,7 +75,6 @@ const Home = () => {
   const onClickHandlerDelete = (tarea_id) => {
     let tasksFilter = filterTasks.filter(t => t.id !== tarea_id);
     setFilterTasks(tasksFilter)
-    // setCantTasks(filterTasks.length - 1)
   };
 
   /**
