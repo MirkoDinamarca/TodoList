@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../Components/Button/Button'
 import List from '../../Components/List/List'
 import Title from '../../Components/Title/Title'
@@ -32,20 +32,24 @@ const Home = () => {
   const [listTasks, setListTasks] = useState(tasks);
   const [filterTasks, setFilterTasks] = useState(tasks);
   const [valueInput1, setValueInput1] = useState('');
-  const [cantTasks, setCantTasks] = useState(checkStateCant);
+  const [cantTasks, setCantTasks] = useState(tasks.length);
 
   /**
    * Cuenta el total de las tareas que vienen desde "BD" de aquellas que tengan el estado en false 
    */
-  function checkStateCant() {
+  const checkStateCant = () => {
     let aux = 0;
     filterTasks.forEach(t => {
       if (!t.estado) {
         aux++
       }
     });
-    return aux;
+    setCantTasks(aux);
   }
+  
+  useEffect(() => {
+    checkStateCant();
+  }, [filterTasks])
 
   /**
    * Agrega una nueva tarea a lo que es la lista de tareas
@@ -125,7 +129,7 @@ const Home = () => {
       <section>
         <input className={style.inputStyle} type="text" value={valueInput1} placeholder='Ingrese el nombre' onChange={e => setValueInput1(e.target.value)} />
         <br />
-        <Button text="Agregar tarea" onClick={onClickHandlerAddTask} classStyle={'btn_add_task'}/>
+        <Button text="Agregar tarea" onClick={onClickHandlerAddTask} classStyle={'btn_add_task'} />
       </section>
 
       {/* Input para buscar las tareas */}
