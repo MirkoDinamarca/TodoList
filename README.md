@@ -55,7 +55,7 @@ La app incluye tambien un buscador dinamico que filtra las tareas en base a lo q
 ## Preguntas
 
 1. componentes: 
-- Botones: Fue utilizado para agregar los botones de agregar y eliminar tarea. 
+- Button: Fue utilizado para agregar los botones de agregar y eliminar tarea. 
 
 - List: Renderiza una lista de tareas con un contador de la cantidad total de tareas y las pendientes.
 
