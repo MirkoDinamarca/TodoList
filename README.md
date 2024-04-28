@@ -11,6 +11,8 @@
 Este repositorio contiene la herramienta que se utiliza para organizar y gestionar tareas por hacer.
 Le permite al usuario agregar nuevas tareas, marcar tareas como completadas y eliminar las mismas.
 
+//Agregar imagenes en el readme
+
 ## Características
 
 - index.js
