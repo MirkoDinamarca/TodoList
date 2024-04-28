@@ -1,80 +1,82 @@
-import React, { useEffect, useState } from 'react'
-import Button from '../../Components/Button/Button'
-import List from '../../Components/List/List'
-import Title from '../../Components/Title/Title'
-import style from './Home.module.css'
+import React, { useEffect, useState } from "react";
+import Button from "../../Components/Button/Button";
+import List from "../../Components/List/List";
+import Title from "../../Components/Title/Title";
+import style from "./Home.module.css";
 // import { db } from '../../data/db'
 
 // Lista de las tareas
 const tasks = [
   {
     id: Math.random().toString(5).substring(2),
-    nombre: 'Juntarme con los chicos a codear',
-    estado: false
+    nombre: "Juntarme con los chicos a codear",
+    estado: false, //completada hubiera sido un mejor nombre, dado que es T/F. Completada = true es mas facil de entender que estado = true
   },
   {
     id: Math.random().toString(5).substring(2),
-    nombre: 'Cocinar',
-    estado: false
+    nombre: "Cocinar",
+    estado: false,
   },
   {
     id: Math.random().toString(5).substring(2),
-    nombre: 'Hacer lo de análisis',
-    estado: false
+    nombre: "Hacer lo de análisis",
+    estado: false,
   },
   {
     id: Math.random().toString(5).substring(2),
-    nombre: 'Ir a inglés',
-    estado: false
+    nombre: "Ir a inglés",
+    estado: false,
   },
-]
+];
+
+//Muy buen trabajo
 
 const Home = () => {
   const [listTasks, setListTasks] = useState(tasks);
   const [filterTasks, setFilterTasks] = useState(tasks);
-  const [valueInput1, setValueInput1] = useState('');
+  const [valueInput1, setValueInput1] = useState(""); //valueInput sin el 1 seria un mejor nombre
   const [cantTasks, setCantTasks] = useState(tasks.length);
 
   /**
-   * Cuenta el total de las tareas que vienen desde "BD" de aquellas que tengan el estado en false 
+   * Cuenta el total de las tareas que vienen desde "BD" de aquellas que tengan el estado en false
    */
   const checkStateCant = () => {
     let aux = 0;
-    filterTasks.forEach(t => {
+    filterTasks.forEach((t) => {
       if (!t.estado) {
-        aux++
+        aux++;
       }
     });
     setCantTasks(aux);
-  }
-  
+  };
+
   useEffect(() => {
     checkStateCant();
-  }, [filterTasks])
+  }, [filterTasks]);
 
   /**
    * Agrega una nueva tarea a lo que es la lista de tareas
    */
   const onClickHandlerAddTask = () => {
-    if (valueInput1 !== '') {
+    if (valueInput1 !== "") {
       let tarea = {
         id: Math.random().toString(5).substring(2),
         nombre: valueInput1,
-        estado: false
-      }
-      setListTasks([...filterTasks, tarea])
-      setFilterTasks([...filterTasks, tarea])
+        estado: false,
+      };
+      setListTasks([...filterTasks, tarea]);
+      setFilterTasks([...filterTasks, tarea]);
     }
 
-    setValueInput1('')
+    setValueInput1("");
   };
 
   /**
-    * Elimina la tarea y filtra por todas las tareas que queda 
-    */
+   * Elimina la tarea y filtra por todas las tareas que queda
+   */
   const onClickHandlerDelete = (tarea_id) => {
-    let tasksFilter = filterTasks.filter(t => t.id !== tarea_id);
-    setFilterTasks(tasksFilter)
+    let tasksFilter = filterTasks.filter((t) => t.id !== tarea_id);
+    setFilterTasks(tasksFilter);
   };
 
   /**
@@ -85,34 +87,36 @@ const Home = () => {
     const taskExist = filterTasks.findIndex((task) => tarea.id === task.id);
 
     if (taskExist >= 0) {
-      const updateTask = [...filterTasks]
+      const updateTask = [...filterTasks];
 
       if (updateTask[taskExist].estado) {
-        updateTask[taskExist].estado = false
+        updateTask[taskExist].estado = false;
       } else {
-        updateTask[taskExist].estado = true
+        updateTask[taskExist].estado = true;
       }
-      setFilterTasks(updateTask)
+      setFilterTasks(updateTask);
     }
 
     let aux = 0;
-    filterTasks.forEach(t => {
+    filterTasks.forEach((t) => {
       if (!t.estado) {
-        aux++
+        aux++;
       }
     });
     setCantTasks(aux);
-  }
+  };
 
   /**
    * Busca lo que el usuario tipee en la barra y filtra las tareas
    */
   const onChangeSearch = (param) => {
     if (!param.target.value) {
-      setFilterTasks(listTasks)
+      setFilterTasks(listTasks);
     } else {
-      let tasksFilter = listTasks.filter(t => (t.nombre).toLowerCase().includes((param.target.value).toLowerCase()));
-      setFilterTasks(tasksFilter)
+      let tasksFilter = listTasks.filter((t) =>
+        t.nombre.toLowerCase().includes(param.target.value.toLowerCase())
+      );
+      setFilterTasks(tasksFilter);
     }
   };
 
@@ -121,18 +125,38 @@ const Home = () => {
       <Title />
       {/* Formulario para agregar una tarea */}
       <section>
-        <input className={style.inputStyle} type="text" value={valueInput1} placeholder='Ingrese el nombre' onChange={e => setValueInput1(e.target.value)} />
+        <input
+          className={style.inputStyle}
+          type="text"
+          value={valueInput1}
+          placeholder="Ingrese el nombre"
+          onChange={(e) => setValueInput1(e.target.value)}
+        />
         <br />
-        <Button text="Agregar tarea" onClick={onClickHandlerAddTask} classStyle={'btn_add_task'} />
+        <Button
+          text="Agregar tarea"
+          onClick={onClickHandlerAddTask}
+          classStyle={"btn_add_task"}
+        />
       </section>
 
       {/* Input para buscar las tareas */}
-      <input className={style.inputStyle} type="text" placeholder='Buscar...' onChange={onChangeSearch} />
+      <input
+        className={style.inputStyle}
+        type="text"
+        placeholder="Buscar..."
+        onChange={onChangeSearch}
+      />
 
       {/* Lista de tareas */}
-      <List filterTasks={filterTasks} cantTasks={cantTasks} onClickHandlerDelete={onClickHandlerDelete} onClickHandlerCheck={onClickHandlerCheck} />
+      <List
+        filterTasks={filterTasks}
+        cantTasks={cantTasks}
+        onClickHandlerDelete={onClickHandlerDelete}
+        onClickHandlerCheck={onClickHandlerCheck}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
